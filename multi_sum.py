@@ -9,7 +9,7 @@ from common.file_sum import sum_txt_file
 
 def sum_txt_file_wrapper(file_paths: list[str]):
     thread_name = threading.current_thread().name
-    print(colored(f"{thread_name} started", "blue"))
+    print(colored(f"{thread_name} started\n", "blue"))
     total = 0
 
     for i in file_paths:
@@ -25,13 +25,14 @@ thread2_files = []
 thread3_files = []
 thread4_files = []
 
-for i in range(3):
-    file_path = f"data/data.txt"
+for i in range(10):
+    file_path = f"data/data {i + 1}.txt"
     thread1_files.append(file_path)
     thread2_files.append(file_path)
     thread3_files.append(file_path)
     thread4_files.append(file_path)
 
+print(len(thread1_files), len(thread2_files), len(thread3_files), len(thread4_files))
 
 start_time = time.time()
 
