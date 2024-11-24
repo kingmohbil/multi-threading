@@ -7,13 +7,13 @@ from common.custom_thread import CustomThread
 from common.file_sum import sum_txt_file
 
 
-def sum_txt_file_wrapper(file_paths: list[str]):
+def sum_txt_file_wrapper(lines: list[[str]]):
     thread_name = threading.current_thread().name
-    print(colored(f"{thread_name} started\n", "blue"))
+    print(colored(f"{thread_name} started", "blue"))
     total = 0
 
-    for i in file_paths:
-        total += sum_txt_file(i)
+    for line in lines:
+        total += sum_txt_file(line)
 
     print(colored(f"{thread_name}   ended", "yellow"))
 
@@ -27,12 +27,16 @@ thread4_files = []
 
 for i in range(10):
     file_path = f"data/data {i + 1}.txt"
-    thread1_files.append(file_path)
-    thread2_files.append(file_path)
-    thread3_files.append(file_path)
-    thread4_files.append(file_path)
 
-print(len(thread1_files), len(thread2_files), len(thread3_files), len(thread4_files))
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+        thread1_files.append(lines)
+        thread2_files.append(lines)
+        thread3_files.append(lines)
+        thread4_files.append(lines)
+
+print(thread1_files)
 
 start_time = time.time()
 
@@ -62,3 +66,5 @@ end_time = time.time()
 
 execution_time = end_time - start_time
 print(colored(f"\nResult: {res}, done in ✅  {round(execution_time, 2)}s", "green"))
+
+exit(0)
